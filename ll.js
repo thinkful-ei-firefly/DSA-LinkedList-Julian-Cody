@@ -204,6 +204,37 @@ function findLast(ll){
 
 // main()
 
+//6.)
+function thirdFromEnd(ll){
+  currNode = ll.head
+  while(currNode !== null){
+    if (currNode.next.next.next === null){
+      return currNode;
+    }
+    currNode = currNode.next
+  }
+}
+
+//7.)
+function middleOfList(ll){
+  currNode = ll.head
+  let count = 0;
+  while(currNode !== null){
+    currNode = currNode.next
+    count ++ 
+  }
+  console.log(count)
+  let half =  Math.ceil(count / 2)
+  console.log(half)
+  currNode = ll.head
+  for (let i=0; i<half ; i++){
+    currNode = currNode.next
+  }
+  return currNode;
+
+}
+
+
 
 //5.) Write an algorithm to reverse a linked list. all pointers should point backward
 // 1->2->3
@@ -228,10 +259,18 @@ function reverseLL(ll){
 let SLL = new LinkedList()
 SLL.insertLast(1)
 SLL.insertLast(2)
-SLL.insertLast(2)
 SLL.insertLast(3)
-reverseLL(SLL)
-display(SLL)
+SLL.insertLast(4)
+SLL.insertLast(5)
+SLL.insertLast(6)
+SLL.insertLast(7)
+SLL.insertLast(8)
+SLL.insertLast(9)
+SLL.insertLast(10)
+// reverseLL(SLL)
+
+console.log(middleOfList(SLL))
+
 
 // 4.)
 function WhatDoesThisProgramDo(lst) {
