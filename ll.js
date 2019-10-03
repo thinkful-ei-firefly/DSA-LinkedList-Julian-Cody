@@ -112,16 +112,14 @@ class LinkedList {
   }
 
   insertAt(newItem, key){
-    if (this.head.value === key || !this.head) {
+    if (this.head.value === key || !this.head || key === 0) {
       this.insertFirst(newItem)
     } else {
-      // Start at the head
       let currNode = this.head
-      let counter = 1
-      // Check for the item
+      let counter = 1 // WHY
       while (currNode.value !== null) {
         if (counter === key) { 
-          currNode.next = new _Node(newItem, currNode)
+          currNode.next = new _Node(newItem, currNode.next)
           return
         }
         currNode = currNode.next
@@ -133,24 +131,75 @@ class LinkedList {
 
 function main() {
   let SLL = new LinkedList()
-  SLL.insertFirst('Starbuck') // 7
-  SLL.insertFirst('Husker')   // 6
-  // Hotdog
-  SLL.insertFirst('Helo')     // 5
-  SLL.insertFirst('Boomer')   // 4
-  // Athena
-  SLL.insertFirst('Squirrel') // 3
-  // Kat
-  SLL.insertFirst('Apollo')   // 2
-  SLL.insertFirst('Tauhida')  // 1
+  SLL.insertFirst('Starbuck') // 9
+  SLL.insertFirst('Husker')   // 8
+  // Hotdog                   // 7
+  SLL.insertFirst('Helo')     // 6
+  SLL.insertFirst('Boomer')   // 5
+  // Athena                   // 4
+  // Kat                      // 3
+  SLL.insertFirst('Squirrel') // 2
+  SLL.insertFirst('Apollo')   // 1
+  SLL.insertFirst('Tauhida')  // 0
 
   SLL.insertBefore('Athena', 'Boomer')
   SLL.insertAfter('Hotdog', 'Helo')
   SLL.insertAt('Kat', 3)
 
-  console.log(SLL.find('Athena').next)  // Husker
-  console.log(SLL.find('Hotdog').next)  // Boomer
-  console.log(SLL.find('Kat').next)     // Squirrel
+  // console.log(SLL.find('Athena').next)    // Boomer
+  // console.log(SLL.find('Hotdog').next)    // Husker
+  // console.log(SLL.find('Kat').next)       // Squirrel
+
+  // display(SLL)
+  size(SLL)
+  console.log(isEmpty(SLL))
+  console.log(findPrevious(SLL, 'Squirrel'))
+  console.log(findLast(SLL))
+}
+
+function display(ll){
+  currNode = ll.head
+  while(currNode !== null){
+    console.log(currNode.value)
+    currNode = currNode.next
+  }
+}
+
+function size(ll){
+  currNode = ll.head
+  let count = 0
+  while(currNode !== null){
+    currNode = currNode.next
+    count++;
+  }
+  console.log(count)
+  return count;
+}
+
+function isEmpty(ll){
+  return !ll.head
+}
+
+function findPrevious(ll, item){
+  currNode = ll.head
+  while(currNode !== null){
+    currNode = currNode.next
+    // looks ahead returns the current
+    if(currNode.next.value === item){
+      return currNode
+    }
+  }
+}
+
+function findLast(ll){
+  currNode = ll.head
+  while(currNode !== null){
+    currNode = currNode.next
+    // looks ahead returns the current
+    if(currNode.next === null){
+      return currNode
+    }
+  }
 }
 
 main()
