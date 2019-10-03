@@ -202,4 +202,54 @@ function findLast(ll){
   }
 }
 
-main()
+// main()
+
+
+//5.) Write an algorithm to reverse a linked list. all pointers should point backward
+// 1->2->3
+// 1<-2<-3
+function reverseLL(ll){
+  let prevNode = null
+  let currNode = ll.head
+  while(currNode !== null){
+    // set nextNode to the next node from curr
+    let nextNode = currNode.next
+    // starts at null, updates below each iteration
+    currNode.next = prevNode
+    // update prevNode to the current node 
+    prevNode = currNode
+    // update currNode... moving our loop
+    currNode = nextNode
+    // set the head of the LL to prevNode which is the currNode
+    ll.head = prevNode
+  }
+}
+
+let SLL = new LinkedList()
+SLL.insertLast(1)
+SLL.insertLast(2)
+SLL.insertLast(2)
+SLL.insertLast(3)
+reverseLL(SLL)
+display(SLL)
+
+// 4.)
+function WhatDoesThisProgramDo(lst) {
+  let current = lst.head; // gets the head of LL
+  while (current !== null) { // breaks if current, which is head !null
+      let newNode = current; // set new node to current (newNode = current)
+      while (newNode.next !== null) { // while the next in newNode !null
+          if (newNode.next.value === current.value) { // if next value === current value
+              newNode.next = newNode.next.next; // newNode next gets set 2 nodes ahead
+          }
+          else {
+              newNode = newNode.next;  // else, newNode = next node
+          }
+      }
+      current = current.next; // set current to the next node
+  }
+}
+
+// checks the newNode against the current node and if they have the same value
+// sets the newNodes next two forward skipping the matching value
+// Polynomial 2(n^2)
